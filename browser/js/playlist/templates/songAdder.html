@@ -1,0 +1,9 @@
+<div class="container">
+  <h3>Add a song</h3>
+	  <form name="songForm" ng-submit="submit($event)">
+	  	<div class="alert alert-warning" ng-show="songForm.$dirty && songForm.$invalid">Pick a song</div>
+	  	<label>{{inputType}}<select ng-options="" name="songNameInput" ng-model="songName" required></select></label>
+	  	 <button type="submit" class="btn" ng-disabled="playlistForm.$invalid">Create Playlist</button>
+	  </form>
+ 
+</div>

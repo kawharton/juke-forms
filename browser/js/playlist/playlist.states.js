@@ -16,9 +16,14 @@ juke.config(function ($stateProvider) {
    $stateProvider.state('playlist', {
     url: '/playlist/:id',
     templateUrl: '/js/playlist/templates/playlist.html',
-    controller: function($scope, $stateParams, PlayerFactory, PlaylistFactory, playlist) { 
+    controller: function($scope, $stateParams, PlayerFactory, PlaylistFactory, playlist, SongFactory, $timeout, $http) { 
 
       $scope.playlist = playlist;
+      // $scope.songlist =
+      SongFactory.getAllSongs()
+      .then(function(songs){
+          $scope.songs = songs.data;
+      });
 
       $scope.toggle = function (song) {
         if (song !== PlayerFactory.getCurrentSong()) {
@@ -36,6 +41,20 @@ juke.config(function ($stateProvider) {
 
       $scope.isPlaying = function (song) {
         return PlayerFactory.isPlaying() && PlayerFactory.getCurrentSong() === song;
+      };
+
+      $scope.submit = function(event){
+        event.preventDefault();
+        console.log("song?? ",$scope.songName);
+        $scope.playlist.songs.push(SongFactory.convert($scope.songName));
+
+         return $http.post('/api/playlists/' + $scope.playlist._id + '/songs', $scope.songName);
+        // .then(function (response) {
+        //     var playlist = response.data
+        //     cachedPlaylists.push(playlist);
+        //     return playlist;
+        // });
+
       };
     },
     resolve: {

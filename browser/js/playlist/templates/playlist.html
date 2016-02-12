@@ -2,6 +2,15 @@
 
 <div>
   <h3>{{ playlist.name }}</h3>
+  <div class="container">
+  <h3>Add a song</h3>
+	  <form name="songForm" ng-submit="submit($event)">
+	  	<div class="alert alert-warning" ng-show="songForm.$dirty && songForm.$invalid">Pick a song</div>
+	  	<label>Song<select ng-options="song as song.name for song in songs" name="songNameInput" ng-model="songName" required></select></label>
+	  	 <button type="submit" class="btn" ng-disabled="songForm.$invalid">Add Song</button>
+	  </form>
+ 
+</div>
   <table class='table' ng-show="playlist.songs.length">
     <thead>
       <tr>

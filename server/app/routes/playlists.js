@@ -57,24 +57,6 @@ router.delete('/:playlistId', function (req, res, next) {
 });
 
 router.get('/:playlistId/songs', (req, res) => res.json(req.playlist.songs) );
-// router.get('/:playlistId/songs', function(req,res,next){
-    
-//     req.playlist.songs.forEach(function(song){
-//       song.artists.forEach(function(artId,j){
-//         console.log("ARTID: ", artId);
-//         mongoose.model('Artist')
-//         .findById(artId)
-//         .then(function (artist) {
-//           if (!artist) return;
-//           song.artists[j] = artist;
-//           // next();
-//           res.json(req.playlist.songs);
-//         })
-//         .then(null, next);
-//       })
-//   });
-// });
-
 
 
 router.post('/:playlistId/songs', function (req, res, next) {
